@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>韓国語文法演習アプリ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700&family=Inter:wght@400;600&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --primary-light: #e3f2fd;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --bg-color: #f8f9fa;
+            --card-outline: #e0e0e0;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        #app {
+            width: 100%;
+            max-width: 500px;
+            background-color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        /* Header */
+        header {
+            padding: 20px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--card-outline);
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+            margin-right: 10px;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* View Container */
+        .view {
+            padding: 20px;
+            flex-grow: 1;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .view.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Top Page & Menus */
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .menu-item {
+            background: var(--white);
+            border: 1px solid var(--card-outline);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .menu-item:hover {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background-color: var(--white);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Explanation Page */
+        .explanation-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .bubble {
+            background-color: var(--bg-color);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .korean-text {
+            font-family: 'Gothic A1', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(74, 144, 226, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .korean-text:hover {
+            background: rgba(74, 144, 226, 0.2);
+        }
+
+        .korean-text::after {
+            content: '🔊';
+            font-size: 0.9rem;
+        }
+
+        .translation {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+
+        .rule-card {
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .vocab-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid var(--card-outline);
+        }
+
+        /* Quiz Page */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            padding: 18px;
+            border: 2px solid var(--card-outline);
+            border-radius: 12px;
+            background: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+        }
+
+        .option-btn.correct {
+            background-color: var(--success-color);
+            color: var(--white);
+            border-color: var(--success-color);
+        }
+
+        .option-btn.wrong {
+            background-color: var(--error-color);
+            color: var(--white);
+            border-color: var(--error-color);
+        }
+
+        /* Score Page */
+        .score-container {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 8px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px;
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        /* Utility */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header id="app-header">
+            <button class="back-btn" id="global-back-btn" onclick="app.goBack()">←</button>
+            <h1 id="header-title">韓国語演習</h1>
+        </header>
+
+        <!-- View: Top Menu -->
+        <main id="view-top" class="view active">
+            <h2>学習する回を選んでください</h2>
+            <ul class="menu-list">
+                <li class="menu-item" onclick="app.goToRound(2)">
+                    <span>第2回：自己紹介しよう！</span>
+                    <span>→</span>
+                </li>
+            </ul>
+        </main>
+
+        <!-- View: Round Menu -->
+        <main id="view-round-menu" class="view">
+            <h2 id="round-title">タイトル</h2>
+            <div class="menu-list">
+                <button class="btn btn-outline" onclick="app.goToExplanation()">💡 解説を読む</button>
+                <button class="btn btn-primary" onclick="app.startQuiz()">📝 練習問題を解く</button>
+            </div>
+        </main>
+
+        <!-- View: Explanation -->
+        <main id="view-explanation" class="view">
+            <div id="explanation-content">
+                <!-- Data injected here -->
+            </div>
+        </main>
+
+        <!-- View: Quiz -->
+        <main id="view-quiz" class="view">
+            <div class="quiz-header">
+                <span id="quiz-progress">問題 1 / 10</span>
+                <span id="quiz-score">正解数: 0</span>
+            </div>
+            <div class="question-text" id="question-text">質問文</div>
+            <div class="options-list" id="options-list">
+                <!-- Options injected here -->
+            </div>
+            <div id="quiz-feedback" style="margin-top: 20px; font-weight: 700; text-align: center; min-height: 1.5em;">
+            </div>
+            <button class="btn btn-primary hidden" id="next-question-btn" onclick="app.nextQuestion()">次の問題へ</button>
+        </main>
+
+        <!-- View: Score -->
+        <main id="view-score" class="view">
+            <div class="score-container">
+                <h2>お疲れ様でした！</h2>
+                <div class="score-circle">
+                    <span class="score-value" id="final-score">0</span>
+                    <span style="font-size: 0.9rem;">点 / 100</span>
+                </div>
+                <p id="score-message">素晴らしいですね！</p>
+                <button class="btn btn-primary" onclick="app.goToView('top')">トップページへ戻る</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const DATA = {
+            rounds: {
+                2: {
+                    title: "自己紹介しよう！[는/은]と[입니다]",
+                    explanations: [
+                        {
+                            type: "conversation",
+                            title: "解説1：회화（会話）",
+                            items: [
+                                { ko: "안녕하세요? 저는 토미입니다. 처음 뵙겠습니다.", ja: "こんにちは。私はトミです。はじめまして。" },
+                                { ko: "네, 반갑습니다. 제 이름은 이준수입니다.", ja: "はい。お会いできて嬉しいです。私の名前はイジュンスです。" },
+                                { ko: "이준수 씨는 대학생입니까?", ja: "イジュンスさんは大学生ですか？" },
+                                { ko: "아니요. 회사원입니다. 잘 부탁합니다.", ja: "いいえ、会社員です。よろしくお願いします。" }
+                            ]
+                        },
+                        {
+                            type: "grammar",
+                            title: "解説2：입니다（〜です）",
+                            rule: "名詞＋입니다 → 〜です（発音は임니다）\n疑問文：名詞＋입니까? → 〜ですか？",
+                            examples: [
+                                { ko: "저는 토미입니다.", ja: "私はトミです" },
+                                { ko: "저는 일본 사람입니다.", ja: "私は日本人です" },
+                                { ko: "회사원입니다.", ja: "会社員です" },
+                                { ko: "주부입니까?", ja: "主婦ですか？" }
+                            ]
+                        },
+                        {
+                            type: "grammar",
+                            title: "解説3：는/은（〜は）",
+                            rule: "名詞＋는/은 → 〜は\n・パッチムなし → 는\n・パッチムあり → 은",
+                            examples: [
+                                { ko: "저는 토미입니다.", ja: "저(パッチムなし) → 는" },
+                                { ko: "제 이름은 이준수입니다.", ja: "이름(パッチムあり) → 은" },
+                                { ko: "이준수 씨는 대학생입니까?", ja: "씨(パッチムなし) → 는" },
+                                { ko: "저는 연예인입니다.", ja: "私は芸能人です" },
+                                { ko: "제 이름은 사쿠라입니다.", ja: "私の名前はさくらです" }
+                            ]
+                        },
+                        {
+                            type: "vocabulary",
+                            title: "語彙リスト",
+                            items: [
+                                { ko: "안녕하세요", ja: "こんにちは" },
+                                { ko: "처음 뵙겠습니다", ja: "はじめまして" },
+                                { ko: "반갑습니다", ja: "お会いできて嬉しいです" },
+                                { ko: "잘 부탁합니다", ja: "よろしくお願いします" },
+                                { ko: "저", ja: "私（丁寧）" },
+                                { ko: "나", ja: "私（カジュアル）" },
+                                { ko: "제", ja: "私の（丁寧）" },
+                                { ko: "이름", ja: "名前" },
+                                { ko: "회사원", ja: "会社員" },
+                                { ko: "대학생", ja: "大学生" },
+                                { ko: "씨", ja: "〜さん" }
+                            ]
+                        }
+                    ],
+                    quiz: [
+                        { q: "「私は」を韓国語にすると？", a: "저는", options: ["저는", "저은", "나는", "나은"] },
+                        { q: "「名前は」を韓国語にすると？", a: "이름은", options: ["이름은", "이름는", "이름이", "이름가"] },
+                        { q: "「会社員は」を韓国語にすると？", a: "회사원은", options: ["회사원은", "회사원는", "회사원이", "회사원가"] },
+                        { q: "「とみさんは」を韓国語にすると？", a: "토미 씨는", options: ["토미 씨는", "토미 씨은", "토미 씨가", "토미 씨이"] },
+                        { q: "「こんにちは」を韓国語にすると？", a: "안녕하세요", options: ["안녕하세요", "반갑습니다", "잘 부탁합니다", "처음 뵙겠습니다"] },
+                        { q: "「はじめまして」を韓国語にすると？", a: "처음 뵙겠습니다", options: ["처음 뵙겠습니다", "안녕하세요", "반갑습니다", "잘 부탁합니다"] },
+                        { q: "「日本人ですか？」を韓国語にすると？", a: "일본사람입니까?", options: ["일본사람입니까?", "일본사람です", "일본사람이에요?", "일본사람는?"] },
+                        { q: "「はい、学生です」を韓国語にすると？", a: "네, 학생입니다", options: ["네, 학생입니다", "네, 학생입니까", "아니요, 학생입니다", "네, 학생는"] },
+                        { q: "저는 ( ) 입니다。の空欄に入る「芸能人」は？", a: "연예인", options: ["연예인", "회사원", "대학생", "주부"] },
+                        { q: "제 이름 ( ) 사쿠라입니다。の空欄に入る助詞は？", a: "은", options: ["은", "는", "이", "가"] }
+                    ]
+                }
+            }
+        };
+
+        const app = {
+            currentView: 'top',
+            viewHistory: [],
+            currentRound: null,
+            currentQuestionIdx: 0,
+            score: 0,
+            isAnswering: false,
+
+            init() {
+                this.updateBackButton();
+            },
+
+            // 選択肢をシャッフルするユーティリティメソッド
+            shuffle(array) {
+                const newArray = [...array];
+                for (let i = newArray.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+                }
+                return newArray;
+            },
+
+            speak(text) {
+                if (!window.speechSynthesis) return;
+                window.speechSynthesis.cancel();
+                const uttr = new SpeechSynthesisUtterance(text);
+                uttr.lang = 'ko-KR';
+                window.speechSynthesis.speak(uttr);
+            },
+
+            goToView(viewId, pushHistory = true) {
+                if (pushHistory) this.viewHistory.push(this.currentView);
+
+                document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+                document.getElementById('view-' + viewId).classList.add('active');
+                this.currentView = viewId;
+                this.updateBackButton();
+
+                // Dynamic titles
+                const titles = {
+                    'top': '韓国語演習',
+                    'round-menu': this.currentRound ? DATA.rounds[this.currentRound].title : '各回のメニュー',
+                    'explanation': '文法解説',
+                    'quiz': '練習問題',
+                    'score': '結果発表'
+                };
+                document.getElementById('header-title').textContent = titles[viewId] || '韓国語演習';
+            },
+
+            goBack() {
+                if (this.viewHistory.length > 0) {
+                    const prevView = this.viewHistory.pop();
+                    this.goToView(prevView, false);
+                }
+            },
+
+            updateBackButton() {
+                const btn = document.getElementById('global-back-btn');
+                if (this.currentView === 'top') {
+                    btn.style.visibility = 'hidden';
+                } else {
+                    btn.style.visibility = 'visible';
+                }
+            },
+
+            goToRound(roundId) {
+                this.currentRound = roundId;
+                document.getElementById('round-title').textContent = DATA.rounds[roundId].title;
+                this.goToView('round-menu');
+            },
+
+            goToExplanation() {
+                const roundData = DATA.rounds[this.currentRound];
+                const container = document.getElementById('explanation-content');
+                container.innerHTML = '';
+
+                roundData.explanations.forEach(section => {
+                    const sectionEl = document.createElement('div');
+                    sectionEl.className = 'explanation-section';
+
+                    let html = `<div class="section-title">${section.title}</div>`;
+
+                    if (section.type === 'conversation') {
+                        section.items.forEach(item => {
+                            html += `
+                                <div class="bubble">
+                                    <div class="korean-text" onclick="app.speak('${item.ko}')">${item.ko}</div>
+                                    <div class="translation">${item.ja}</div>
+                                </div>
+                            `;
+                        });
+                    } else if (section.type === 'grammar') {
+                        html += `
+                            <div class="rule-card">
+                                <strong>ルール:</strong><br>${section.rule.replace(/\n/g, '<br>')}
+                            </div>
+                        `;
+                        section.examples.forEach(ex => {
+                            html += `
+                                <div style="margin-bottom: 15px;">
+                                    <div class="korean-text" onclick="app.speak('${ex.ko}')">${ex.ko}</div>
+                                    <div class="translation">${ex.ja}</div>
+                                </div>
+                            `;
+                        });
+                    } else if (section.type === 'vocabulary') {
+                        html += `<div class="vocab-grid">`;
+                        section.items.forEach(vocab => {
+                            html += `
+                                <div class="vocab-item">
+                                    <div class="korean-text" onclick="app.speak('${vocab.ko}')">${vocab.ko}</div>
+                                    <span class="translation">${vocab.ja}</span>
+                                </div>
+                            `;
+                        });
+                        html += `</div>`;
+                    }
+
+                    sectionEl.innerHTML = html;
+                    container.appendChild(sectionEl);
+                });
+
+                this.goToView('explanation');
+            },
+
+            startQuiz() {
+                this.currentQuestionIdx = 0;
+                this.score = 0;
+                this.isAnswering = false;
+                this.renderQuestion();
+                this.goToView('quiz');
+            },
+
+            renderQuestion() {
+                const roundData = DATA.rounds[this.currentRound];
+                const qData = roundData.quiz[this.currentQuestionIdx];
+
+                document.getElementById('quiz-progress').textContent = `問題 ${this.currentQuestionIdx + 1} / ${roundData.quiz.length}`;
+                document.getElementById('quiz-score').textContent = `正解数: ${this.score}`;
+                document.getElementById('question-text').textContent = qData.q;
+
+                const optionsList = document.getElementById('options-list');
+                optionsList.innerHTML = '';
+                document.getElementById('quiz-feedback').textContent = '';
+                document.getElementById('next-question-btn').classList.add('hidden');
+                this.isAnswering = true;
+
+                // 選択肢をコピーしてシャッフル
+                const shuffledOptions = this.shuffle(qData.options);
+
+                shuffledOptions.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.textContent = opt;
+                    btn.onclick = () => this.checkAnswer(opt, btn);
+                    optionsList.appendChild(btn);
+                });
+            },
+
+            checkAnswer(selected, btn) {
+                if (!this.isAnswering) return;
+                this.isAnswering = false;
+
+                const roundData = DATA.rounds[this.currentRound];
+                const qData = roundData.quiz[this.currentQuestionIdx];
+                const feedbackEl = document.getElementById('quiz-feedback');
+
+                const allBtns = document.querySelectorAll('.option-btn');
+
+                if (selected === qData.a) {
+                    btn.classList.add('correct');
+                    feedbackEl.textContent = '正解！✨';
+                    feedbackEl.style.color = 'var(--success-color)';
+                    this.score++;
+                } else {
+                    btn.classList.add('wrong');
+                    feedbackEl.textContent = `残念... 正解は「${qData.a}」でした。`;
+                    feedbackEl.style.color = 'var(--error-color)';
+
+                    // Highlight correct answer
+                    allBtns.forEach(b => {
+                        if (b.textContent === qData.a) b.classList.add('correct');
+                    });
+                }
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            },
+
+            nextQuestion() {
+                const roundData = DATA.rounds[this.currentRound];
+                this.currentQuestionIdx++;
+
+                if (this.currentQuestionIdx < roundData.quiz.length) {
+                    this.renderQuestion();
+                } else {
+                    this.showScore();
+                }
+            },
+
+            showScore() {
+                const roundData = DATA.rounds[this.currentRound];
+                const totalQuestions = roundData.quiz.length;
+                const finalScore = Math.round((this.score / totalQuestions) * 100);
+
+                document.getElementById('final-score').textContent = finalScore;
+
+                let message = "";
+                if (finalScore === 100) message = "パーフェクト！素晴らしいです！🎊";
+                else if (finalScore >= 80) message = "その調子です！合格点ですね！👍";
+                else if (finalScore >= 60) message = "あともう少し！復習してみましょう。";
+                else message = "まずは解説をもう一度読んでみましょう。";
+
+                document.getElementById('score-message').textContent = message;
+                this.goToView('score');
+            }
+        };
+
+        window.onload = () => app.init();
+    </script>
+</body>
+
+</html>
