@@ -628,6 +628,7 @@
                     feedbackEl.textContent = '正解！✨';
                     feedbackEl.style.color = 'var(--success-color)';
                     this.score++;
+                    this.speak(selected);
                 } else {
                     btn.classList.add('wrong');
                     feedbackEl.textContent = `残念... 正解は「${qData.a}」でした。`;
