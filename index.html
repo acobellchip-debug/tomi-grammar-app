@@ -394,6 +394,10 @@
                     <span>第17回：敬語の助詞［(으)십니다］と［(으)세요］</span>
                     <span>→</span>
                 </li>
+                <li class="menu-item" onclick="app.goToRound(18)">
+                    <span>第18回：(이)십니다/세요, (으)십시오, 名詞の敬語</span>
+                    <span>→</span>
+                </li>
             </ul>
         </main>
 
@@ -1995,6 +1999,109 @@
                         { q: "자다（寝る）の特別な敬語形「お休みになる」は？", a: "주무시다", options: ["주무시다", "자시다", "자으시다", "자세다"] },
                         { q: "「お元気ですか？」(합니다体) を韓国語にすると？", a: "잘 지내십니까?", options: ["잘 지내십니까?", "잘 지내습니까?", "잘 지내으십니까?", "잘 지내세요습니까?"] },
                         { q: "「ご存知でしょうか？」を韓国語にすると？（알다＝知る、ㄹ語幹）", a: "아십니까?", options: ["아십니까?", "알십니까?", "알으십니까?", "아으십니까?"] }
+                    ]
+                },
+                18: {
+                    title: "(이)십니다/세요, (으)십시오, 名詞の敬語",
+                    explanations: [
+                        {
+                            type: "conversation",
+                            title: "解説1：회화（会話）",
+                            items: [
+                                { ko: "어서 오십시오. 고객님. 성함이 어떻게 되세요?", ja: "いらっしゃいませ。お客様。お名前を伺ってもよろしいでしょうか？" },
+                                { ko: "토미입니다. 오늘 7시에 3명 예약했습니다.", ja: "トミです。今日、7時に3名予約しました。" },
+                                { ko: "여기에 기록이 있습니다. 모두 한국 분이세요?", ja: "ここに記録があります。皆さん、韓国の方でしょうか？" },
+                                { ko: "아뇨. 모두 일본 사람이에요.", ja: "いいえ。みんな日本人です。" },
+                                { ko: "알겠습니다. 이쪽으로 들어오십시오.", ja: "分かりました。こちらの方にお入りください。" }
+                            ]
+                        },
+                        {
+                            type: "grammar",
+                            title: "解説2：名詞の敬語（特別な単語に変わるもの）",
+                            rule: "<table style=\"width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95rem; text-align: center;\"><tr style=\"background: var(--primary-light); color: var(--primary-color);\"><th style=\"border: 1px solid #ddd; padding: 10px;\">普通形</th><th style=\"border: 1px solid #ddd; padding: 10px;\">敬語形</th><th style=\"border: 1px solid #ddd; padding: 10px;\">意味</th></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">이름</td><td style=\"border: 1px solid #ddd; padding: 10px;\">성함</td><td style=\"border: 1px solid #ddd; padding: 10px;\">お名前</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">집</td><td style=\"border: 1px solid #ddd; padding: 10px;\">댁</td><td style=\"border: 1px solid #ddd; padding: 10px;\">ご自宅</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">나이</td><td style=\"border: 1px solid #ddd; padding: 10px;\">연세</td><td style=\"border: 1px solid #ddd; padding: 10px;\">お歳</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">생일</td><td style=\"border: 1px solid #ddd; padding: 10px;\">생신</td><td style=\"border: 1px solid #ddd; padding: 10px;\">お誕生日</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">밥</td><td style=\"border: 1px solid #ddd; padding: 10px;\">진지</td><td style=\"border: 1px solid #ddd; padding: 10px;\">お食事</td></tr></table>",
+                            examples: []
+                        },
+                        {
+                            type: "grammar",
+                            title: "解説3：(이)십니다／(이)세요（〜でいらっしゃいます・〜でございます）",
+                            rule: "・ルール：名詞＋(이)십니다／(이)세요\n　・パッチムあり → 이십니다／이세요\n　・パッチムなし → 십니다／세요\n\n・疑問文：(이)십니까?／(이)세요?",
+                            examples: [
+                                { ko: "모두 한국 분이세요?", ja: "皆さん、韓国の方でいらっしゃいますか？ → 한국 분＋이세요（パッチムあり）" },
+                                { ko: "강 선생님께서는 중학교 교사십니다.", ja: "カン先生は中学校の教師であられます → 교사＋십니다（パッチムなし）" },
+                                { ko: "윤 박사님께서는 도쿄대학교 교수십니다.", ja: "ユン博士は東京大学の教授であられます → 교수＋십니다（パッチムなし）" },
+                                { ko: "할아버님께서는 건축 회사 사장님이십니다.", ja: "おじい様は建築会社の社長であられます → 사장님＋이십니다（パッチムあり）" }
+                            ]
+                        },
+                        {
+                            type: "grammar",
+                            title: "解説4：(으)십시오（〜してください・フォーマル）",
+                            rule: "・(으)세요と似たニュアンスだが、より格式高い\n・ルール：用言の語幹に付ける\n　・パッチムあり → 으십시오\n　・パッチムなし → 십시오\n　・ㄹ脱落 → 십시오",
+                            examples: [
+                                { ko: "어서 오십시오.", ja: "いらっしゃいませ → 오다＋십시오 ※会話では어서 오세요" },
+                                { ko: "이 자리에 앉으십시오.", ja: "この席にお座りください → 앉다＋으십시오 ※会話では앉으세요" },
+                                { ko: "길은 저에게 물어보십시오.", ja: "道は私にお聞きください → 물어보다＋십시오" },
+                                { ko: "이 티켓을 받으십시오.", ja: "このチケットを受け取ってください → 받다＋으십시오" }
+                            ]
+                        },
+                        {
+                            type: "grammar",
+                            title: "解説5：よく使う挨拶表現（(으)십시오／(으)세요）",
+                            rule: "<table style=\"width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95rem; text-align: center;\"><tr style=\"background: var(--primary-light); color: var(--primary-color);\"><th style=\"border: 1px solid #ddd; padding: 10px;\">韓国語</th><th style=\"border: 1px solid #ddd; padding: 10px;\">日本語</th></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">안녕히 가십시오／가세요</td><td style=\"border: 1px solid #ddd; padding: 10px;\">（見送る側の）さようなら</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">안녕히 계십시오／계세요</td><td style=\"border: 1px solid #ddd; padding: 10px;\">（立ち去る側の）さようなら</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">안녕히 주무십시오／주무세요</td><td style=\"border: 1px solid #ddd; padding: 10px;\">お休みなさい</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">들어가십시오／들어가세요</td><td style=\"border: 1px solid #ddd; padding: 10px;\">お帰りください・電話を切るとき</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">수고하십시오／수고하세요</td><td style=\"border: 1px solid #ddd; padding: 10px;\">お疲れ様です・でした</td></tr><tr><td style=\"border: 1px solid #ddd; padding: 10px; font-weight: bold;\">새해 복 많이 받으십시오／받으세요</td><td style=\"border: 1px solid #ddd; padding: 10px;\">明けましておめでとうございます</td></tr></table>",
+                            examples: [
+                                { ko: "안녕히 가세요.", ja: "さようなら" },
+                                { ko: "안녕히 계세요.", ja: "さようなら" },
+                                { ko: "안녕히 주무세요.", ja: "お休みなさい" },
+                                { ko: "들어가세요.", ja: "お帰りください" },
+                                { ko: "수고하세요.", ja: "お疲れ様です" },
+                                { ko: "새해 복 많이 받으세요.", ja: "明けましておめでとうございます" }
+                            ]
+                        },
+                        {
+                            type: "vocabulary",
+                            title: "語彙リスト",
+                            items: [
+                                { ko: "고객님", ja: "お客様（格式高い）" },
+                                { ko: "손님", ja: "お客様" },
+                                { ko: "성함", ja: "お名前（이름の敬語）" },
+                                { ko: "어떻게", ja: "どのように" },
+                                { ko: "되다", ja: "なる" },
+                                { ko: "예약하다", ja: "予約する" },
+                                { ko: "예약석", ja: "予約席" },
+                                { ko: "기록", ja: "記録" },
+                                { ko: "기록하다", ja: "記録する" },
+                                { ko: "모두", ja: "全て・全員・皆" },
+                                { ko: "다", ja: "全て" },
+                                { ko: "모든", ja: "全ての" },
+                                { ko: "이쪽", ja: "こちら" },
+                                { ko: "그쪽", ja: "そちら" },
+                                { ko: "저쪽", ja: "あちら" },
+                                { ko: "들어오다", ja: "入ってくる" },
+                                { ko: "들어가다", ja: "入っていく" },
+                                { ko: "자리", ja: "席" },
+                                { ko: "빈자리", ja: "空席" },
+                                { ko: "댁", ja: "ご自宅" },
+                                { ko: "연세", ja: "お歳" },
+                                { ko: "생신", ja: "お誕生日" },
+                                { ko: "진지", ja: "お食事" },
+                                { ko: "박사님", ja: "博士" },
+                                { ko: "교수", ja: "教授" },
+                                { ko: "교사", ja: "教師" },
+                                { ko: "사장님", ja: "社長" },
+                                { ko: "건축 회사", ja: "建築会社" }
+                            ]
+                        }
+                    ],
+                    quiz: [
+                        { q: "「韓国の方でいらっしゃいますか？」を韓国語にすると？（한국 분＝パッチムあり）", a: "한국 분이세요?", options: ["한국 분이세요?", "한국 분세요?", "한국 분예요?", "한국 분으세요?"] },
+                        { q: "사장님（社長・パッチムあり）に「(이)십니다」をつけて「社長であられます」にすると？", a: "사장님이십니다", options: ["사장님이십니다", "사장님십니다", "사장님으십니다", "사장님이세십니다"] },
+                        { q: "교수（教授・パッチムなし）に「(이)십니다」をつけると？", a: "교수십니다", options: ["교수십니다", "교수이십니다", "교수으십니다", "교수세십니다"] },
+                        { q: "물어보다（聞く・パッチムなし）に「(으)십시오」をつけて「お聞きください」にすると？", a: "물어보십시오", options: ["물어보십시오", "물어보으십시오", "물어보세시오", "물어보ㄹ십시오"] },
+                        { q: "받다（受け取る・パッチムあり）に「(으)십시오」をつけて「受け取ってください」にすると？", a: "받으십시오", options: ["받으십시오", "받십시오", "받세십시오", "받았으십시오"] },
+                        { q: "앉다（座る・パッチムあり）に「(으)십시오」をつけると？", a: "앉으십시오", options: ["앉으십시오", "앉십시오", "앉세십시오", "앉세요시오"] },
+                        { q: "「いらっしゃいませ」を韓国語にすると？", a: "어서 오십시오", options: ["어서 오십시오", "어서 오으십시오", "어서 오세요시오", "어서 옵시오"] },
+                        { q: "「お疲れさまでした（수고하세요／수고하십시오）」の意味として正しいのは？", a: "お疲れ様です・でした", options: ["お疲れ様です・でした", "いらっしゃいませ", "おやすみなさい", "さようなら"] },
+                        { q: "「明けましておめでとうございます」を韓国語にすると？", a: "새해 복 많이 받으십시오", options: ["새해 복 많이 받으십시오", "새해 복 많이 받십시오", "새해 복 많이 받세요시오", "새해 복 많이 받았으십시오"] },
+                        { q: "이름（名前）の敬語形は？", a: "성함", options: ["성함", "이름님", "명함", "연세"] }
                     ]
                 }
             }
